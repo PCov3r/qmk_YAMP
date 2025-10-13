@@ -4,4 +4,6 @@
 #define MATRIX_ROWS 1
 #define MATRIX_COLS 1
 
-
+#define I2C_DRIVER        I2CD1 
+#define I2C1_SCL_PIN      GP7
+#define I2C1_SDA_PIN      GP6

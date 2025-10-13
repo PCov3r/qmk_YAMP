@@ -7,8 +7,8 @@
     "diode_direction": "COL2ROW",
     "features": { },
     "matrix_pins": {
-        "cols": ["GP6"],
-        "rows": ["GP7"]
+        "cols": ["GP3"],
+        "rows": ["GP4"]
     },
     "url": "",
     "usb": {

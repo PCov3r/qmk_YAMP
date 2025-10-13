@@ -5,7 +5,7 @@ CUSTOM_MATRIX = lite
 SRC += matrix.c
 
 # Enable I2C subsystem
-# I2C_DRIVER_REQUIRED = yes
+I2C_DRIVER_REQUIRED = yes
 
 # Enable debug
 CONSOLE_ENABLE = yes
