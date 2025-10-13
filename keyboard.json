@@ -1,0 +1,26 @@
+{
+    "manufacturer": "PCov3r",
+    "keyboard_name": "yamp",
+    "maintainer": "PCov3r",
+    "processor": "RP2040",
+    "bootloader": "rp2040",
+    "diode_direction": "COL2ROW",
+    "features": { },
+    "matrix_pins": {
+        "cols": ["GP6"],
+        "rows": ["GP7"]
+    },
+    "url": "",
+    "usb": {
+        "vid": "0xEEEE",
+        "pid": "0x2019",
+        "device_version": "0.0.1"
+    },
+    "layouts": {
+        "LAYOUT_1x1": {
+            "layout": [
+                {"matrix": [0, 0], "x": 0, "y": 0}
+            ]
+        }
+    }
+}
