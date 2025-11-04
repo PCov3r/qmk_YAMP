@@ -15,6 +15,13 @@
 #define NEO_TRELLIS_NUM_COLS 4
 #define NEO_TRELLIS_NUM_KEYS (NEO_TRELLIS_NUM_ROWS * NEO_TRELLIS_NUM_COLS)
 
+typedef enum {
+    ORIENT_0,
+    ORIENT_90,
+    ORIENT_180,
+    ORIENT_270
+} trellis_orientation_t;
+
 typedef union {
   struct {
     uint8_t STATE : 1;  ///< the current state of the key
@@ -39,4 +46,5 @@ void Seesaw_setKeypadEvent(uint8_t key, uint8_t edge, bool enable);
 void Seesaw_activateKey(uint8_t key, uint8_t edge, bool enable);
 uint8_t Seesaw_getKeypadCount(void);
 bool Seesaw_readKeypad(keyEventRaw *buf, uint8_t count) ;
-void Seesaw_readTrellis(bool polling);
+bool Seesaw_readTrellis(bool polling, matrix_row_t current_matrix[], trellis_orientation_t orientation);
+void rotate_coords(uint8_t *x, uint8_t *y, trellis_orientation_t orientation);

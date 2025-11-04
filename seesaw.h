@@ -3,6 +3,7 @@
 
 #include "i2c_master.h"
 #include "wait.h"
+#include "matrix.h"
 #include <string.h>
 #include <stdbool.h>
 

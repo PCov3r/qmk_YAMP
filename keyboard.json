@@ -2,6 +2,7 @@
     "manufacturer": "PCov3r",
     "keyboard_name": "yamp",
     "maintainer": "PCov3r",
+    "host_language": "french",
     "processor": "RP2040",
     "bootloader": "rp2040",
     "diode_direction": "COL2ROW",
@@ -12,8 +13,8 @@
     },
     "url": "",
     "usb": {
-        "vid": "0xEEEE",
-        "pid": "0x2019",
+        "vid": "0x594D",
+        "pid": "0x0001",
         "device_version": "0.0.1"
     },
     "layouts": {

@@ -5,7 +5,6 @@
 #include "neotrellis.h"
 
 
-
 // QMK required function: Initialize the matrix pins
 void matrix_init_custom(void) {
     // Set row pins as outputs
@@ -23,8 +22,8 @@ void matrix_init_custom(void) {
 
 // QMK required function: Scan the matrix
 bool matrix_scan_custom(matrix_row_t current_matrix[]) {
-    Seesaw_readTrellis(true);
-    // i2c_status_t status = i2c_ping_address(MY_I2C_ADDRESS, 100);
-    // uprintf("%d",status);
-    return false;
+    static const trellis_orientation_t orientation = ORIENT_180;
+    bool changed = Seesaw_readTrellis(true, current_matrix, orientation);
+    return changed;
 }
+
