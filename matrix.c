@@ -3,6 +3,7 @@
 #include "print.h"
 #include "seesaw.h"
 #include "neotrellis.h"
+#include "neopixel.h"
 
 
 // QMK required function: Initialize the matrix pins
@@ -10,6 +11,9 @@ void matrix_init_custom(void) {
     // Set row pins as outputs
     i2c_init();
     Seesaw_resetAllRegisters();
+    Seesaw_neopixPin();
+    Seesaw_neopixType();
+    Seesaw_neopixLength();
     Seesaw_enableKeypadInterrupt();
     i2c_status_t status = i2c_ping_address(MY_I2C_ADDRESS, 100);
     uprintf("i2c device status: %d",status);
