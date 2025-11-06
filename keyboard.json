@@ -17,6 +17,19 @@
         "pid": "0x0001",
         "device_version": "0.0.1"
     },
+    "rgb_matrix": {
+        "default": {
+            "animation": "breathing"
+        },
+        "animations":{
+            "static": true,
+            "breathing": true,
+            "rainbow_mood": true
+        },
+        "driver": "custom",
+        "max_brightness": 120,
+        "sleep": true
+    },
     "layouts": {
         "LAYOUT_4x4": {
             "layout": [

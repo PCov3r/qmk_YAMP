@@ -20,9 +20,15 @@ void Seesaw_neopixShow() {
   SeeSaw_Write(NEOPIXEL_BASE, NEOPIXEL_SHOW, NULL, 0);
 }
 
-void Seesaw_neopixColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b) {
+void Seesaw_neopixColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint8_t brightness) {
 
   if (n < TRELLIS_NEOPIX_NUMBER) {
+
+    if (brightness) { // See notes in setBrightness()
+      r = (r * brightness) >> 8;
+      g = (g * brightness) >> 8;
+      b = (b * brightness) >> 8;
+    }
 
     uint8_t p[3];
     p[0] = g; // Store R,G,B
@@ -39,4 +45,34 @@ void Seesaw_neopixColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b) {
 
     SeeSaw_Write(NEOPIXEL_BASE, NEOPIXEL_BUF, writeBuf, len + 2);
   }
+}
+
+void Seesaw_neopixIndicesColor(uint16_t n[], uint8_t r, uint8_t g, uint8_t b, uint8_t brightness, uint8_t len) {
+  for (int i = 0; i < len; i++){
+    Seesaw_neopixColor(n[i], r, g, b, brightness);
+  }
+}
+
+void Seesaw_neopixArrayColor(uint16_t n[], uint8_t r[], uint8_t g[], uint8_t b[], uint8_t brightness, uint8_t len) {
+  for (int i = 0; i < len; i++){
+    Seesaw_neopixColor(n[i], r[i], g[i], b[i], brightness);
+  }
+}
+
+void Seesaw_neopixAllColor(uint8_t r, uint8_t g, uint8_t b, uint8_t brightness) {
+  for (int i = 0; i < TRELLIS_NEOPIX_NUMBER; i++){
+    Seesaw_neopixColor(i, r, g, b, brightness);
+  }
+}
+
+void Seesaw_neopixIndexOff(uint16_t n) {
+  Seesaw_neopixColor(n, 0, 0, 0, 0);
+  Seesaw_neopixShow();
+}
+
+void Seesaw_neopixAllOff() {
+  for (int i = 0; i < TRELLIS_NEOPIX_NUMBER; i++){
+    Seesaw_neopixColor(i, 0, 0, 0, 0);
+  }
+  Seesaw_neopixShow();
 }

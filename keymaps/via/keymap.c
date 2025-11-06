@@ -46,6 +46,15 @@ const uint16_t PROGMEM keymaps[_NUM_TILES][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
+led_config_t g_led_config = {
+    {
+        { 15, 14, 13, 12},
+        {11, 10, 9, 8},
+        {7, 6, 5, 4},
+        {3, 2, 1, 0}
+    }
+};
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!record->event.pressed)
         return true;

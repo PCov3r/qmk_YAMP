@@ -1,3 +1,5 @@
+#ifndef NEOPIX_H
+#define NEOPIX_H
 
 #include "seesaw.h"
 #include "print.h"
@@ -28,4 +30,11 @@ void Seesaw_neopixPin(void);
 void Seesaw_neopixLength(void);
 void Seesaw_neopixType(void);
 void Seesaw_neopixShow(void);
-void Seesaw_neopixColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b);
+void Seesaw_neopixColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint8_t brightness);
+void Seesaw_neopixIndicesColor(uint16_t n[], uint8_t r, uint8_t g, uint8_t b, uint8_t brightness, uint8_t len);
+void Seesaw_neopixArrayColor(uint16_t n[], uint8_t r[], uint8_t g[], uint8_t b[], uint8_t brightness, uint8_t len);
+void Seesaw_neopixAllColor(uint8_t r, uint8_t g, uint8_t b, uint8_t brightness);
+void Seesaw_neopixIndexOff(uint16_t n);
+void Seesaw_neopixAllOff(void);
+
+#endif

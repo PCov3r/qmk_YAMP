@@ -3,6 +3,7 @@
   "vendorId": "0x594D",
   "productId": "0x0001",
   "matrix": { "rows": 4, "cols": 4 },
+  "menus": [ "qmk_rgb_matrix" ],
   "layouts": {
     "keymap": [
       [ "1,0", "1,1", "1,2", "1,3" ],
