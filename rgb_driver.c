@@ -18,7 +18,6 @@ void rgb_matrix_driver_flush(void) {
 void rgb_matrix_driver_set_color(int index, uint8_t red, uint8_t green, uint8_t blue) {
     uint8_t brightness = 200;
     uint16_t n = index;
-    print("TEST \n\n");
     Seesaw_neopixColor(n, red, green, blue, brightness);
 }
 
