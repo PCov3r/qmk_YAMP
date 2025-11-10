@@ -1,6 +1,10 @@
 
+#ifndef NEOTRELLIS_H
+#define NEOTRELLIS_H
+
 #include "seesaw.h"
 #include "print.h"
+#include "rgb_matrix.h"
 
 #define KEYPAD_BASE 0x10
 
@@ -11,9 +15,6 @@
 #define KEYPAD_COUNT  0x04
 #define KEYPAD_FIFO  0x10
 
-#define NEO_TRELLIS_NUM_ROWS 4
-#define NEO_TRELLIS_NUM_COLS 4
-#define NEO_TRELLIS_NUM_KEYS (NEO_TRELLIS_NUM_ROWS * NEO_TRELLIS_NUM_COLS)
 
 typedef enum {
     ORIENT_0,
@@ -46,5 +47,9 @@ void Seesaw_setKeypadEvent(uint8_t key, uint8_t edge, bool enable);
 void Seesaw_activateKey(uint8_t key, uint8_t edge, bool enable);
 uint8_t Seesaw_getKeypadCount(void);
 bool Seesaw_readKeypad(keyEventRaw *buf, uint8_t count) ;
-bool Seesaw_readTrellis(bool polling, matrix_row_t current_matrix[], trellis_orientation_t orientation);
+bool Seesaw_readTrellis(bool polling, matrix_row_t current_matrix[]);
 void rotate_coords(uint8_t *x, uint8_t *y, trellis_orientation_t orientation);
+void exchange_led_index(led_config_t *config, trellis_orientation_t orientation);
+void exchange_led_positions(led_config_t *config, trellis_orientation_t orientation);
+
+#endif

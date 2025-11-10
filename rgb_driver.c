@@ -33,4 +33,25 @@ const rgb_matrix_driver_t rgb_matrix_driver = {
     .set_color_all = rgb_matrix_driver_set_color_all,
 };
 
+bool rgb_matrix_indicators_kb() {
+    if (!rgb_matrix_indicators_user()) {
+         return false;
+    }
+    for (int i = 0; i < 4; i++) {
+        uint8_t h = layer_color_config.color[i].h;
+        uint8_t s = layer_color_config.color[i].s;
+        uint8_t v = rgb_matrix_get_val();
+        HSV hsv = {h, s, v};
+        RGB rgb = hsv_to_rgb(hsv);
+
+        // Ttop row is row 0
+        uint8_t row = 0;
+        uint8_t col = i;
+        uint8_t led_index = g_led_config.matrix_co[row][col];
+
+        rgb_matrix_set_color(led_index, rgb.r, rgb.g, rgb.b);
+    }
+    return true;
+}
+
 #endif

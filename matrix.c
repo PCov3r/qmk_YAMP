@@ -6,8 +6,11 @@
 #include "neopixel.h"
 #include "rgb_driver.h"
 
+
 // QMK required function: Initialize the matrix pins
 void matrix_init_custom(void) {
+    exchange_led_index(&g_led_config, ORIENTATION);
+    exchange_led_positions(&g_led_config, ORIENTATION);
     // Set row pins as outputs
     i2c_init();
     Seesaw_resetAllRegisters();
@@ -19,16 +22,11 @@ void matrix_init_custom(void) {
         Seesaw_activateKey(i, SEESAW_KEYPAD_EDGE_FALLING, true);
     }    
     rgb_matrix_driver_init();
-    // for (uint8_t i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
-    //     rgb_matrix_driver_set_color(i, 255, 0, 0); // red
-    // }
-    // rgb_matrix_driver_flush();
 }
 
 // QMK required function: Scan the matrix
 bool matrix_scan_custom(matrix_row_t current_matrix[]) {
-    static const trellis_orientation_t orientation = ORIENT_180;
-    bool changed = Seesaw_readTrellis(true, current_matrix, orientation);
+    bool changed = Seesaw_readTrellis(true, current_matrix);
     return changed;
 }
 

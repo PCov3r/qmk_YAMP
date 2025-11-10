@@ -2,7 +2,7 @@
 # CUSTOM_MATRIX = yes
 # SRC += matrix_seesaw.c
 CUSTOM_MATRIX = lite
-SRC += matrix.c seesaw.c neotrellis.c neopixel.c rgb_driver.c
+SRC += matrix.c seesaw.c neotrellis.c neopixel.c rgb_driver.c via_custom.c
 
 # Enable I2C subsystem
 I2C_DRIVER_REQUIRED = yes

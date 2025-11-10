@@ -49,7 +49,7 @@ void rotate_coords(uint8_t *row, uint8_t *col, trellis_orientation_t orientation
   }
 }
 
-bool Seesaw_readTrellis(bool polling, matrix_row_t current_matrix[], trellis_orientation_t orientation) {
+bool Seesaw_readTrellis(bool polling, matrix_row_t current_matrix[]) {
   bool changed = false;
   uint8_t count = Seesaw_getKeypadCount();
   wait_us(500);
@@ -63,7 +63,7 @@ bool Seesaw_readTrellis(bool polling, matrix_row_t current_matrix[], trellis_ori
       if (e[i].bit.NUM < NEO_TRELLIS_NUM_KEYS) {
         uint8_t row = e[i].bit.NUM / MATRIX_COLS;
         uint8_t col = e[i].bit.NUM % MATRIX_COLS;
-        rotate_coords(&row, &col, orientation);
+        rotate_coords(&row, &col, ORIENTATION);
         uint8_t edge = e[i].bit.EDGE;
         #ifdef CONSOLE_ENABLE
           printf("%d, %d: %d\n",row, col, edge);
@@ -79,4 +79,39 @@ bool Seesaw_readTrellis(bool polling, matrix_row_t current_matrix[], trellis_ori
     }
   }
   return changed;
+}
+
+void exchange_led_index(led_config_t *config, trellis_orientation_t orientation){
+    uint8_t rotated[MATRIX_ROWS][MATRIX_COLS];
+
+    for (uint8_t r = 0; r < MATRIX_ROWS; r++) {
+        for (uint8_t c = 0; c < MATRIX_COLS; c++) {
+            uint8_t new_r = r;
+            uint8_t new_c = c;
+            rotate_coords(&new_r, &new_c, orientation);
+            rotated[new_r][new_c] = config->matrix_co[r][c];
+        }
+    }
+
+    memcpy(config->matrix_co, rotated, sizeof(rotated));
+}
+
+void exchange_led_positions(led_config_t *config, trellis_orientation_t orientation) {
+    const float x_max = 224.0f;
+    const float y_max = 64.0f;
+    const uint8_t cols = MATRIX_COLS;
+    const uint8_t rows = MATRIX_ROWS;
+
+    for (uint8_t i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
+        // Infer the current grid position from LED index
+        uint8_t row = i / cols;
+        uint8_t col = i % cols;
+
+        // Rotate that grid coordinate
+        rotate_coords(&row, &col, orientation);
+
+        // Compute new X/Y from formula
+        config->point[i].x = (uint8_t)((x_max / (cols - 1)) * col + 0.5f);
+        config->point[i].y = (uint8_t)((y_max / (rows - 1)) * row + 0.5f);
+    }
 }

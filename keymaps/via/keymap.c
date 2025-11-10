@@ -1,6 +1,8 @@
 #include QMK_KEYBOARD_H
 
 #include "sendstring_french.h"
+#include "via_custom.h"
+
 
 enum layer_names {
     TILE_0,
@@ -17,7 +19,7 @@ enum custom_keycodes {
   KC_TILE_JUMP3,
 };
 
-static uint8_t current_tile = 0;
+uint8_t current_tile = 0;
 
 const uint16_t PROGMEM keymaps[_NUM_TILES][MATRIX_ROWS][MATRIX_COLS] = {
   [TILE_0] = LAYOUT_4x4(
@@ -48,15 +50,15 @@ const uint16_t PROGMEM keymaps[_NUM_TILES][MATRIX_ROWS][MATRIX_COLS] = {
 
 led_config_t g_led_config = {
     {
-        { 15, 14, 13, 12},
-        {11, 10, 9, 8},
-        {7, 6, 5, 4},
-        {3, 2, 1, 0}
+        {0,1,2,3},
+        {4,5,6,7},
+        {8,9,10,11},
+        {12,13,14,15}
     }, {
-      { 224,  64 }, { 149,  64 }, { 75,  64 }, { 0,  64 },
-      { 224,  43 }, { 149,  43 }, { 75,  43 }, { 0,  43 },
-      { 224,  21 }, { 149,  21 }, { 75,  21 }, { 0,  21 },
-      { 224,  0 }, { 149,  0 }, { 75,  0 }, { 0,  0 },
+        { 0,  0 }, { 75,  0 }, { 149,  0 }, { 224,  0 },
+        { 0, 21 }, { 75, 21 }, { 149, 21 }, { 224, 21 },
+        { 0, 43 }, { 75, 43 }, { 149, 43 }, { 224, 43 },
+        { 0, 64 }, { 75, 64 }, { 149, 64 }, { 224, 64 }
     }, {
       1,1,1,1,
       1,1,1,1,
@@ -73,21 +75,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_TILE_JUMP0:
             current_tile = 0;
             layer_move(current_tile);
+            apply_layer_color(current_tile);
             return false;
 
         case KC_TILE_JUMP1:
             current_tile = 1;
             layer_move(current_tile);
+            apply_layer_color(current_tile);
             return false;
 
         case KC_TILE_JUMP2:
             current_tile = 2;
             layer_move(current_tile);
+            apply_layer_color(current_tile);
             return false;
 
         case KC_TILE_JUMP3:
             current_tile = 3;
             layer_move(current_tile);
+            apply_layer_color(current_tile);
             return false;
     }
     return true;
@@ -99,4 +105,7 @@ void keyboard_post_init_user(void) {
   debug_matrix=true;
   debug_keyboard=true;
   //debug_mouse=true;
+
+  color_config_load();
+  apply_layer_color(current_tile);
 }
